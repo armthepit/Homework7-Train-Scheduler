@@ -1,0 +1,28 @@
+Train Scheduler Psuedo Code
+
+HTML
+
+Heading
+
+Train Station
+Austin, TX Current Local Time
+
+Table
+
+Time Of Next Train
+Train Number
+Train Name
+Destination
+Status
+
+Form
+
+Train Number
+Train Name
+Destination
+First Train Time
+Train Frequency
+
+Functions
+
+Add train to firebase

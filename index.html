@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Train Scheduler</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+<!-- Train Scheduler -->
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">
+	
+		<!-- Departures -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1 class="panel-title"><strong>Train Departures</strong></h1>
+				</div>
+				<div class="panel-body">
+					<table class="table table-hover" id='employeeTable'>
+						<thead>
+							<tr>
+								<th>Train Number</th>
+								<th>Train Name</th>
+								<th>Departing To</th>
+								<th>Next Train</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-md-2">
+							<button type="button" class="btn btn-default">Add Train</button>
+						</div>
+						<div class="col-md-8">
+							<h3 class="panel-title text-center"><strong>Austin, Texas</strong></h3>
+						</div>
+						<div class="col-md-2">
+							Current Time: <span id="currentTime">10:00</span>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>	
+	<div class="row">
+		<div id="ads" class="col-md-12">
+			
+		</div>
+	</div>			
+	<div class="row">
+		<div class="col-md-12">
+			<!-- Add Train  -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Add Train</strong></h3>
+				</div>
+				<div class="panel-body">
+	
+
+				<!-- Entry Form -->
+				<form>
+					<div class="row">
+						<div class="col-md-2">					
+							<div class="form-group">
+								<label for="trainInput">Train Number</label>
+								<input type="text" class="form-control" id="trainInput">
+							</div>
+						</div>
+						<div class="col-md-10">
+							<div class="form-group">
+								<label for="trainNameInput">Train Name</label>
+								<input type="text" class="form-control" id="trainNameInput">
+							</div>
+						</div>
+					</div>
+							
+					<div class="row">
+						<div class="col-md-12">	
+							<div class="form-group">
+								<label for="destinationInput">Destination</label>
+								<input type="text" class="form-control" id="destinationInput">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">	
+							<div class="form-group">
+								<label for="firstDepartureInput">First Departure</label>
+								<input type="text" class="form-control" id="firstDepartureInput" placeholder="HH:MM (Military Time)">
+							</div>
+						</div>
+						<div class="col-md-6">		
+							<div class="form-group">
+								<label for="frequencyInput">Frequency</label>
+								<input type="text" class="form-control" id="frequencyInput" placeholder="Number of Minutes between trains">
+							</div>	
+						</div>
+					</div>										
+
+					<button type="submit" class="btn btn-default" id="addEmployeeBtn">Submit</button>
+				</form>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- Javascript -->
+<script src="assets/javascript/train.js"></script>
+
+</body>
+</html>

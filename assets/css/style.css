@@ -1,0 +1,52 @@
+html {
+	height: 100%;
+}
+
+body {
+	background: #ffffff;
+	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+	color: #000000;
+	padding: 10px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* General Settings */
+
+.container {
+  background-color: #000000;
+  color: #ffffff;	
+}
+
+.panel-default {
+  background-color: #000000;
+  color: #ffffff;		
+  border: 0px;
+  margin: 0;
+}
+
+.panel-default > .panel-heading,
+.panel-default > .panel-footer {
+  background-color: #000000;
+  color: #ffffff;
+  border: 0px;
+}
+
+tbody {
+	color: #ffff00;
+}
+
+
+/* Ads Styling */
+
+#ads {
+	padding: 10px;
+}
+
+/* Current Time Schedule */
+
+#currentTime {
+	color: #ffff00;
+}
