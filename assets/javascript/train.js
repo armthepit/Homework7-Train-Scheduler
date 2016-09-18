@@ -3,7 +3,7 @@
 
 	// Display Add Train Form when Add Train clicked
 	$("#displayAddTrainBtn").on("click", function(){
-		$("#addTrain").removeClass("hide");	
+			$("#addTrainBtn").removeClass("hide");	
 	});
 
 	// Add train to Firebase
@@ -29,16 +29,37 @@
 		// Upload train data to Firebase
 		database.push(newTrain);
 
-		// Alert
-		alert("Train successfully added");
-
 		// Clears all of the text-boxes
-		$("#trainInput").val().trim("");
-		$("#trainNameInput").val().trim("");
-		$("#destinationInput").val().trim("");
-		$("#firstDepartureInput").val().trim("");
-		$("#frequencyInput").val().trim("");
+		$("#trainInput").val("");
+		$("#trainNameInput").val("");
+		$("#destinationInput").val("");
+		$("#firstDepartureInput").val("");
+		$("#frequencyInput").val("");
+
+		// Hide Add Train Form After adding train to database
+
+		$("#addTrain").addClass("hide");
 
 		// Determine when the next train arrives.
 		return false;
+	});
+
+	// When a firebase event detected add a row for the new train
+		database.on("child_added", function(childSnapshot, prevChildKey){
+
+		console.log(childSnapshot.val());
+
+		// Store everything into a variable.
+		var train = childSnapshot.val().train;
+		var trainName = childSnapshot.val().trainName;
+		var destination = childSnapshot.val().destination;
+		var firstDeparture = childSnapshot.val().firstDeparture;
+		var frequency = childSnapshot.val().frequency;
+
+		// Employee Info
+		console.log(train);
+
+		// Add each train's data into the table 
+		$("#trainTable > tbody").append("<tr><td>" + train + "</td><td>" + trainName + "</td><td>" + destination + "</td><td>" + firstDeparture + "</td><td>" + frequency + "</td></tr>");
+
 	});

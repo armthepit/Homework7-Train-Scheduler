@@ -38,6 +38,10 @@ tbody {
 	color: #ffff00;
 }
 
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background: #ffffff;
+    color: #000000;
+}
 
 /* Ads Styling */
 
