@@ -5,9 +5,14 @@
 	<title>Train Scheduler</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Custom CSS -->
 	<link rel="stylesheet" href="assets/css/style.css">
+	<!-- Latest JQuery -->
 	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- Firebase Reference -->
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>	
 
 
 </head>
@@ -42,7 +47,7 @@
 				<div class="panel-footer">
 					<div class="row">
 						<div class="col-md-2">
-							<button type="button" class="btn btn-default">Add Train</button>
+							<button type="button" id="displayAddTrain" class="btn btn-default">Add Train</button>
 						</div>
 						<div class="col-md-8">
 							<h3 class="panel-title text-center"><strong>Austin, Texas</strong></h3>
@@ -60,7 +65,7 @@
 			
 		</div>
 	</div>			
-	<div class="row">
+	<div id="addTrain" class="row hide">
 		<div class="col-md-12">
 			<!-- Add Train  -->
 			<div class="panel panel-default">

@@ -12,7 +12,10 @@ $(document).ready(function(){
 
 	database = firebase.database();
 
-
+	// Display Add Train Form when Add Train clicked
+	$("#displayAddTrain").on("click", function(){
+		$("#addTrain").removeClass("hide");	
+	});
 
 
 
