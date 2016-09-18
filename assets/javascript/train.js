@@ -3,7 +3,13 @@
 
 	// Display Add Train Form when Add Train clicked
 	$("#displayAddTrainBtn").on("click", function(){
-			$("#addTrainBtn").removeClass("hide");	
+		if ( $("#addTrain" ).hasClass( "hide" ) ) {
+			$("#addTrain").removeClass("hide");
+			$("#displayAddTrainBtn").html("Cancel Add Train");	
+		} else {
+			$("#addTrain").addClass("hide");
+			$("#displayAddTrainBtn").html("Add Train");
+		}	
 	});
 
 	// Add train to Firebase
@@ -55,9 +61,6 @@
 		var destination = childSnapshot.val().destination;
 		var firstDeparture = childSnapshot.val().firstDeparture;
 		var frequency = childSnapshot.val().frequency;
-
-		// Employee Info
-		console.log(train);
 
 		// Add each train's data into the table 
 		$("#trainTable > tbody").append("<tr><td>" + train + "</td><td>" + trainName + "</td><td>" + destination + "</td><td>" + firstDeparture + "</td><td>" + frequency + "</td></tr>");
