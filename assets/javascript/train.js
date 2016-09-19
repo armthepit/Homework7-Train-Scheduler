@@ -22,6 +22,7 @@
 		var destination = $("#destinationInput").val().trim();
 		var firstDeparture = $("#firstDepartureInput").val().trim();
 		var frequency = $("#frequencyInput").val().trim();
+		var update = '';
 
 
 		// Creates local "temporary" object for holding employee data
@@ -31,6 +32,7 @@
 			destination: destination,
 			firstDeparture: firstDeparture,
 			frequency: frequency,
+			update: ''
 		}
 
 		// Upload train data to Firebase
@@ -54,8 +56,6 @@
 	// When a firebase event detected add a row for the new train
 		database.on("child_added", function(childSnapshot, prevChildKey){
 
-		console.log(childSnapshot.val());
-
 		// Store everything into a variable.
 		var train = childSnapshot.val().train;
 		var trainName = childSnapshot.val().trainName;
@@ -78,10 +78,9 @@
 			var nextTrain = frequency - (nextTrain%frequency);
 			// var arrivalTime = moment(currentTime.add(nextTrain)).format('HH:mm');
 			var arrivalTime = moment().add(nextTrain, 'minutes').format('HH:mm');
-			console.log(nextTrain);
 		}
 
-		var status = 'On Time';		
+		var status = 'On Time';	
 
 		// Add each train's data into the table 
 		$("#trainTable > tbody").append("<tr><td>" + train + "</td><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + arrivalTime + "</td><td>" + nextTrain + " </td><td>" + status + "</td></tr>");
@@ -93,9 +92,43 @@
 	function crStartClockNow() {
 	    crClockInterval = setInterval(function() {
 	        $('#currentTime').html(moment().format('H:mm'));
-	        console.log('one min');
-	    }, 1000 * 60);
+	        $('#trains').empty();
+			database.once("value", function(snapshot) {
+			    snapshot.forEach(function(childSnapshot) {
+				    var key = childSnapshot.key();
+				    var childData = childSnapshot.val();
+				    		// Store everything into a variable.
+					var train = childSnapshot.val().train;
+					var trainName = childSnapshot.val().trainName;
+					var destination = childSnapshot.val().destination;
+					var firstDeparture = childSnapshot.val().firstDeparture;
+					var frequency = childSnapshot.val().frequency;
 
+					// Calculate mins to next train
+					
+					var currentTime = moment();
+					firstDeparture = moment(firstDeparture,'HH mm');
+
+					if (currentTime < firstDeparture) {
+						var arrivalTime = moment(firstDeparture).format('HH:mm');
+						var nextTrain = moment.duration(firstDeparture.diff(currentTime));
+						var nextTrain = Math.round(nextTrain.asMinutes());
+					} else {
+						var nextTrain = moment.duration(currentTime.diff(firstDeparture));
+						var nextTrain = Math.round(nextTrain.asMinutes());
+						var nextTrain = frequency - (nextTrain%frequency);
+						// var arrivalTime = moment(currentTime.add(nextTrain)).format('HH:mm');
+						var arrivalTime = moment().add(nextTrain, 'minutes').format('HH:mm');
+					}
+
+					var status = 'On Time';	
+
+					// Add each train's data into the table 
+					$("#trainTable > tbody").append("<tr><td>" + train + "</td><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + arrivalTime + "</td><td>" + nextTrain + " </td><td>" + status + "</td></tr>");
+				});	
+			});
+
+	    }, 1000 * 60);
 	}	
 
 
