@@ -23,13 +23,14 @@
 		var firstDeparture = $("#firstDepartureInput").val().trim();
 		var frequency = $("#frequencyInput").val().trim();
 
+
 		// Creates local "temporary" object for holding employee data
 		var newTrain = {
 			train:  train,
 			trainName: trainName,
 			destination: destination,
 			firstDeparture: firstDeparture,
-			frequency: frequency
+			frequency: frequency,
 		}
 
 		// Upload train data to Firebase
@@ -62,7 +63,41 @@
 		var firstDeparture = childSnapshot.val().firstDeparture;
 		var frequency = childSnapshot.val().frequency;
 
+		// Calculate mins to next train
+		
+		var currentTime = moment();
+		firstDeparture = moment(firstDeparture,'HH mm');
+
+		if (currentTime < firstDeparture) {
+			var arrivalTime = moment(firstDeparture).format('HH:mm');
+			var nextTrain = moment.duration(firstDeparture.diff(currentTime));
+			var nextTrain = Math.round(nextTrain.asMinutes());
+		} else {
+			var nextTrain = moment.duration(currentTime.diff(firstDeparture));
+			var nextTrain = Math.round(nextTrain.asMinutes());
+			var nextTrain = frequency - (nextTrain%frequency);
+			// var arrivalTime = moment(currentTime.add(nextTrain)).format('HH:mm');
+			var arrivalTime = moment().add(nextTrain, 'minutes').format('HH:mm');
+			console.log(nextTrain);
+		}
+
+		var status = 'On Time';		
+
 		// Add each train's data into the table 
-		$("#trainTable > tbody").append("<tr><td>" + train + "</td><td>" + trainName + "</td><td>" + destination + "</td><td>" + firstDeparture + "</td><td>" + frequency + "</td></tr>");
+		$("#trainTable > tbody").append("<tr><td>" + train + "</td><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + arrivalTime + "</td><td>" + nextTrain + " </td><td>" + status + "</td></tr>");
 
 	});
+
+	// Start Clock With Current Time
+	
+	function crStartClockNow() {
+	    crClockInterval = setInterval(function() {
+	        $('#currentTime').html(moment().format('H:mm'));
+	        console.log('one min');
+	    }, 1000 * 60);
+
+	}	
+
+
+	$('#currentTime').html(moment().format('H:mm'));
+	crStartClockNow()
