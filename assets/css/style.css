@@ -3,7 +3,8 @@ html {
 }
 
 body {
-	background: #ffffff;
+	background: url("../images/whitetile.jpg");
+	background-size: cover;
 	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
 	color: #000000;
 	padding: 10px;
@@ -32,6 +33,10 @@ body {
   background-color: #000000;
   color: #ffffff;
   border: 0px;
+}
+
+.panelBorder {
+	border: 5px solid #ffff00;
 }
 
 tbody {
